@@ -1,7 +1,7 @@
 <template>
-  <header class="header">
+  <header class="poster">
     <router-link to="/">
-        <h1>Rick and Morty</h1>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Rick_and_Morty.svg" alt="rick and morty">
     </router-link>
   </header>
   <main>
@@ -11,17 +11,23 @@
 
 <style>
 * {
-  margin: 0 50px;
+  margin: 0 0px;
   padding: 0%;
   box-sizing: border-box;
-  background-color: #f7f7f7;
+  background-color: #300909;
   text-align: center;
   text-decoration: none;
+  font-family: "roboto";
+  color: white;
+  justify-content: center;
 
 }
-.header, .header h1 {
-  background-color: black;
-  color: white;
+.poster {
+ width: 100%;
+}
+.poster img {
+  max-width: 100%;
+  margin: auto;
 }
 
 </style>

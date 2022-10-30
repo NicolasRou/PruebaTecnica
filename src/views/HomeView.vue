@@ -1,12 +1,9 @@
 <template>
   <div class="home">
-    <div class="poster">
-      <img src="https://images6.alphacoders.com/909/909641.png" alt="rick and morty">
-    </div>
-    <div>
-      <p>¡Explora todos los personajes!</p>
+    <div class="title">
+      <h1>¡Explora todos los personajes!</h1>
         <router-link to="/character">
-          <button>Ver personajes</button>
+          <button class="character">Ver personajes</button>
         </router-link>
     </div>
     <router-view/>
@@ -24,11 +21,25 @@ export default {
 .home {
   text-align: center;
 }
-.poster {
- width: 100%;
+.title h1 {
+  margin: 100px 0;
 }
-.poster img {
-  max-width: 800px;
-  margin: auto;
+.character {
+  color: #318aac;
+  width: 25%;
+  font-size: 20px;
+  font-weight: 500;
+  border-radius: 100px;
+  padding: 0.5em 1.2em;
+  background: rgba(0,0,0,0);
+  border: 2px solid;
+  border-color: #bdcc6b;
+  transition: all 1s ease;
+  position: relative;
+  cursor: pointer;
+}
+.character:hover {
+  background: #318aac;
+  color: #fff;
 }
 </style>

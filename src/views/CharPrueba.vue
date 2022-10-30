@@ -1,63 +1,62 @@
 <template>
     <div class="home">
-      <div class="search">
+      <div class="container_search">
         <form @submit.prevent="SearchCharacters()" class="search-box">
-            <input type="text" placeholder="What are you looking for?" v-model="search" />
-            <input type="submit" value="Search" />
+            <input type="text" placeholder="¿Que personaje buscas?" v-model="search" class="search"/>
+            <input type="submit" value="Search" class="submit"/>
         </form>
       </div>
         <div class="display">
-            <ul>
+            <ul class="list">
                 <li v-for=" c of character" :key="c.id" class="card">
-                    <div class="conainer-menu">
+                    <div class="container-menu">
                         <div class="container" >
-                            <div class="name">
-                                <h2>{{c.name}}</h2>
-                            </div>
                             <div class="img">
                                 <img :src="c.image" alt="">
                             </div>
+                            <div class="name">
+                                <h2>{{c.name}}</h2>
+                            </div>
                             <div class="estado">
-                                <h3>{{c.status}}</h3>
+                                <h4>{{c.status}}</h4>
                             </div>
                             <div class="especie">
-                                <h3>Species: {{c.species}}</h3>
+                                <h4>Species: {{c.species}}</h4>
                             </div>
                             <div class="genero">
-                                <h3>Gender: {{c.gender}}</h3>
+                                <h4>Gender: {{c.gender}}</h4>
                             </div>
                             <div class="ubicacion">
-                                <h3>Location: {{c.location.name}}</h3>
+                                <h4>Location: {{c.location.name}}</h4>
                             </div>
                             <div class="comentarios">
-                                <h3>Comentarios: </h3>
+                                <h4>Comentarios: </h4>
                             </div>
                         </div>
+                        <router-link v-bind:to="`/character/${c.id}`">
+                            <button class="details"> Mas detalles</button>
+                        </router-link>
                     </div>
-                    <router-link v-bind:to="`/character/${c.id}`">
-                        <button> Mas detalles</button>
-                    </router-link>
                 </li>
                 <router-view/>
             </ul>
         </div>
-        <div div>
-            <ul>
+        <div class="pagination">
+            <ul class="pagination_list">
                 <li v-for="page in pages" v-bind:key="page"><a @click.prevent="Pagination(page)" href="#!">{{page}}</a></li>
             </ul>
-            <button @click.prevent="Pagination(page--)" >Anterior</button>
+            <button @click.prevent="Pagination(page--)" class="pagination_button">Anterior</button>
             <ul>
-                <li>
+                <li class="list_page">
                     <a>{{page}}</a>
                 </li>
             </ul>
-            <button @click.prevent="Pagination(page++)" >Siguiente</button>
+            <button @click.prevent="Pagination(page++)" class="pagination_button">Siguiente</button>
         </div>
     </div>
   </template>
 
 <script>
-
 import { onMounted, ref } from 'vue';
 
 export default {
@@ -68,7 +67,6 @@ export default {
     const pages = ref(0);
     const comments = ref("");
     const elements = ref([]);
-        
     
         const CharacterView = () => {
             fetch("https://rickandmortyapi.com/api/character")
@@ -101,23 +99,8 @@ export default {
                 })
         }   
 
-        // const  AmountComments = () => {
-        //     fetch(`http://localhost:3500/character/${elements.value}/comments`)
-        //         .then(response => response.json())
-        //         .then(data => {
-        //             console.log(data.comments)
-        //             comments.value = data.comments;
-                    
-                   
-        //         })
-                
-        // }
-        
         onMounted (()=>{
             CharacterView()
-            // AmountComments()
-          
-            
         })
 
         return {
@@ -130,18 +113,107 @@ export default {
             Pagination,  
             elements,
             comments,
-            // AmountComments,
-          
-            
         }
     }
 }
-
 </script>
 
 <style>
+.home {
+    margin: 80px 0;
+}
+.search {
+    width: 40%;
+    border: 2px solid #0b5ed7;
+    border-radius: 8px;
+    box-shadow: 1px 3px 9px rgb(0 0 0 / 25%);
+    padding: 10px 15px;
+    font-size: 1.25rem;
+}
+.submit {
+    margin: 10px;
+    color: #fff;
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    padding: 10px 15px;
+    font-size: 1.25rem;
+    border-radius: 8px;
+}
+.submit:hover {
+    background-color: #0b5ed7;
+    transition: 0.4s;
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
 .card {
     list-style: none;
     margin: 50px;
 }
+
+.list {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 100%;
+    justify-content: center;
+}
+.container {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.container-menu {
+    border: 0px solid #0b5ed7;
+    border-radius: 20%;
+}
+.img {
+    max-width: 100%;
+}
+.img img {
+    border-radius: 10%;
+}
+.details {
+    color: #fff;
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    padding: 10px 15px;
+    font-size: 1.25rem;
+    border-radius: 8px;
+    margin: 10px;
+}
+.details:hover{
+    background-color: #0b5ed7;
+    transition: 0.4s;
+    cursor: pointer;
+    transform: scale(1.1);
+}
+.pagination {
+    display: flex;
+    gap: 5px;
+}
+.pagination_list {
+    display: flex;
+    gap: 5px;
+}
+.pagination_list li {
+    list-style: none;
+}
+.pagination_button {
+    color: #fff;
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    padding: 3px;
+    font-size: 0.8rem;
+    border-radius: 8px;
+}
+.pagination_button {
+    background-color: #0b5ed7;
+    transition: 0.4s;
+    cursor: pointer;
+}
+.list_page {
+    list-style: none;
+}
+
 </style>
