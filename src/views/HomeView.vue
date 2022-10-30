@@ -1,18 +1,34 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="poster">
+      <img src="https://images6.alphacoders.com/909/909641.png" alt="rick and morty">
+    </div>
+    <div>
+      <p>¡Explora todos los personajes!</p>
+        <router-link to="/character">
+          <button>Ver personajes</button>
+        </router-link>
+    </div>
+    <router-view/>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
 export default {
-  name: 'HomeView',
-  components: {
-    HelloWorld
-  }
+ 
 }
+
 </script>
+
+<style>
+.home {
+  text-align: center;
+}
+.poster {
+ width: 100%;
+}
+.poster img {
+  max-width: 800px;
+  margin: auto;
+}
+</style>
